@@ -16,7 +16,7 @@ const main = async () => {
     console.log(`wait until tests to be finished...`);
 
     const response = await instance.post(
-      `/${ORGANIZATION}/${PROJECT}/cross-batch-run`,
+      `/${ORGANIZATION}/${PROJECT}/cross-batch-run/`,
       {
         test_settings_number: TEST_SETTINGS_NUMBER,
       }

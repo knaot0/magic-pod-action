@@ -23,7 +23,7 @@ Run batch test
 ## Example usage
 
 ```yml
-uses: knaot0/magicpod-action@v1.1
+uses: knaot0/magic-pod-action@v1.1
 with:
   API_TOKEN: ${{ secrets.MAGIC_POD_API_TOKEN }}
   ORGANIZATION: "Organization name"

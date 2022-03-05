@@ -1,0 +1,8 @@
+{
+  "name": "magicpod-action",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/knaot0/magicpod-action.git",
+  "author": "Naoto92X82V99 <naoto5018@gmail.com>",
+  "license": "MIT"
+}

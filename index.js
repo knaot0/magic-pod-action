@@ -1,23 +1,31 @@
 const core = require("@actions/core");
-const { execSync } = require("child_process");
+const axios = require("axios").default;
 
 const API_TOKEN = core.getInput("API_TOKEN");
 const ORGANIZATION = core.getInput("ORGANIZATION");
 const PROJECT = core.getInput("PROJECT");
 const TEST_SETTINGS_NUMBER = core.getInput("TEST_SETTINGS_NUMBER");
 
-const command = [
-  "./magicpod-api-client",
-  "batch-run",
-  `-t ${API_TOKEN}`,
-  `-o ${ORGANIZATION}`,
-  `-p ${PROJECT}`,
-  `-S ${TEST_SETTINGS_NUMBER}`,
-].join(" ");
+const instance = axios.create({
+  baseURL: "https://magic-pod.com/api/v1.0/",
+  headers: { Authorization: `Token ${API_TOKEN}` },
+});
 
-try {
-  console.log(`wait until tests to be finished...`);
-  execSync(command);
-} catch (error) {
-  core.setFailed(error.message);
-}
+const main = async () => {
+  try {
+    console.log(`wait until tests to be finished...`);
+
+    const response = await instance.post(
+      `/${ORGANIZATION}/${PROJECT}/cross-batch-run`,
+      {
+        test_settings_number: TEST_SETTINGS_NUMBER,
+      }
+    );
+
+    console.log(response.data);
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+};
+
+main();
